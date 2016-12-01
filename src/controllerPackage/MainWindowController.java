@@ -86,14 +86,17 @@ public class MainWindowController implements Initializable{
 
         MainModel.getInstance().getLabelList().addListener((ListChangeListener.Change<? extends String> c)-> {
             c.next();
+            //c.reset();
 
 
-            updatePlot(MainModel.getInstance().getLabelList());
-            c.reset();
+           if (c.wasReplaced())updatePlot(MainModel.getInstance().getLabelList());
+
+            //c.reset();
 
 
                 }
         );
+
 
 
 
@@ -171,9 +174,8 @@ public class MainWindowController implements Initializable{
 
 
     private void updatePlot(List<String> list){
-        System.out.println(list.get(0));
-        System.out.println(list.get(1));
-        System.out.println(list.get(2));
+        System.out.println(list.get(0)+ list.get(1) +list.get(2));
+
 
     }
 

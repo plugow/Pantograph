@@ -193,6 +193,8 @@ public class JogController implements Initializable{
         thirdPlus.setDisable(false);
 
 
+
+
     }
     //CARTESIAN
     @FXML private void cartesianRadioClicked(){
@@ -241,14 +243,14 @@ public class JogController implements Initializable{
     @FXML private void firstMinusClicked(){
         System.out.println(angleValue1);
         angleValue1-=1;
+        angleValue2-=1;
+        angleValue3-=1;
 
         //MainModel.getInstance().getLabelList().addAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
         lock.lock();
         try {
-            MainModel.getInstance().getLabelList().removeAll();
-            MainModel.getInstance().getLabelList().add(0,Integer.toString(angleValue1));
-            MainModel.getInstance().getLabelList().add(1,Integer.toString(angleValue2));
-            MainModel.getInstance().getLabelList().add(2,Integer.toString(angleValue3));
+            MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
+
 
         } finally {
             lock.unlock();
@@ -277,10 +279,7 @@ public class JogController implements Initializable{
         //MainModel.getInstance().getLabelList().addAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
         lock.lock();
         try {
-            MainModel.getInstance().getLabelList().removeAll();
-            MainModel.getInstance().getLabelList().add(0,Integer.toString(angleValue1));
-            MainModel.getInstance().getLabelList().add(1,Integer.toString(angleValue2));
-            MainModel.getInstance().getLabelList().add(2,Integer.toString(angleValue3));
+            MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
 
         } finally {
             lock.unlock();
