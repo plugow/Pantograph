@@ -50,51 +50,13 @@ public class MainWindowController implements Initializable{
         MainModel.getInstance().currentLabel().textProperty().addListener((observable, oldValue, newValue) -> informationBar.setText(newValue));
 
 
-        MainModel.getInstance().currentValue1().textProperty().addListener((observable, oldValue, newValue) -> {
-            lock.lock();
-            try {
-                alfa1=(float)Math.toRadians(Integer.parseInt(newValue));
-                setForwardKin(alfa1,alfa2,alfa3);
-            } finally {
-                lock.unlock();
-            }
-
-        });
-
-        MainModel.getInstance().currentValue2().textProperty().addListener((observable, oldValue, newValue) -> {
-            lock.lock();
-            try {
-                alfa2=(float)Math.toRadians(Integer.parseInt(newValue));
-                setForwardKin(alfa1,alfa2,alfa3);
-            } finally {
-                lock.unlock();
-            }
-
-        });
-
-        MainModel.getInstance().currentValue3().textProperty().addListener((observable, oldValue, newValue) -> {
-            lock.lock();
-            try {
-                alfa3=(float)Math.toRadians(Integer.parseInt(newValue));
-                setForwardKin(alfa1,alfa2,alfa3);
-            } finally {
-                lock.unlock();
-            }
-
-
-        });
 
         MainModel.getInstance().getLabelList().addListener((ListChangeListener.Change<? extends String> c)-> {
             c.next();
-            //c.reset();
-
 
            if (c.wasReplaced())updatePlot(MainModel.getInstance().getLabelList());
 
-            //c.reset();
-
-
-                }
+            }
         );
 
 
@@ -174,7 +136,11 @@ public class MainWindowController implements Initializable{
 
 
     private void updatePlot(List<String> list){
-        System.out.println(list.get(0)+ list.get(1) +list.get(2));
+        //System.out.println(list.get(0)+ list.get(1) +list.get(2));
+        alfa1=(float)Math.toRadians(Integer.parseInt(list.get(0)));
+        alfa2=(float)Math.toRadians(Integer.parseInt(list.get(1)));
+        alfa3=(float)Math.toRadians(Integer.parseInt(list.get(2)));
+        setForwardKin(alfa1,alfa2,alfa3);
 
 
     }
