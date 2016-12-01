@@ -1,6 +1,7 @@
 package controllerPackage;
 
 
+import javafx.collections.ListChangeListener;
 import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,8 @@ import mainPackage.MainModel;
 
 import java.awt.*;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class MainWindowController implements Initializable{
@@ -40,11 +42,14 @@ public class MainWindowController implements Initializable{
     private float alfa2=pi/2;
     private float alfa3=pi/2;
     private ReentrantLock lock = new ReentrantLock();
+    List<String> lista;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         MainModel.getInstance().currentLabel().textProperty().addListener((observable, oldValue, newValue) -> informationBar.setText(newValue));
+
+
         MainModel.getInstance().currentValue1().textProperty().addListener((observable, oldValue, newValue) -> {
             lock.lock();
             try {
@@ -78,6 +83,17 @@ public class MainWindowController implements Initializable{
 
 
         });
+
+        MainModel.getInstance().getLabelList().addListener((ListChangeListener.Change<? extends String> c)-> {
+            c.next();
+
+
+            updatePlot(MainModel.getInstance().getLabelList());
+            c.reset();
+
+
+                }
+        );
 
 
 
@@ -150,6 +166,14 @@ public class MainWindowController implements Initializable{
         plot3.setPreferredSize(new Dimension(500,500));
 
         swingNode.setContent(plot3);
+
+    }
+
+
+    private void updatePlot(List<String> list){
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
+        System.out.println(list.get(2));
 
     }
 

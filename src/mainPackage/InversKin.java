@@ -3,18 +3,14 @@ package mainPackage;
 
 public class InversKin {
 
-    private int armLength1=140;
-    private int armLength2=450;
-    private int armLength3=350;
-    private int armLength4=136;
 
-    public InversKin() {
-    }
-
-
-
-    public double[] inverse(double x, double y, double z){
+    public static double[] inverse(double x, double y, double z){
         double[] angleValue=new double[3];
+        int armLength1=140;
+        int armLength2=450;
+        int armLength3=350;
+        int armLength4=136;
+
 
         angleValue[0]=Math.atan2(y,x);
         double zdod=z-armLength1+armLength4;

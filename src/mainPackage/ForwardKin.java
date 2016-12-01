@@ -71,7 +71,7 @@ public class ForwardKin {
         xyzValue[0][0]=P01[0][0];
         xyzValue[0][1]=P01[1][0];
         xyzValue[0][2]=P01[2][0];
-
+//        xx4(m)=P04(2);
 //        yy4(m)=P04(2);
 //        zz4(m)=P04(3);
 //        xx3(m)=P03(1);

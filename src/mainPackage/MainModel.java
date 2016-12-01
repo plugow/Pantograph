@@ -1,10 +1,16 @@
 package mainPackage;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.zu.ardulink.Link;
 
-public class MainModel {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MainModel{
     private final static MainModel instance = new MainModel();
 
     public static MainModel getInstance() {
@@ -36,6 +42,14 @@ public class MainModel {
     public Label currentValue3(){return value3;}
 
 
+
+
+    private ObservableList<String> labelList= FXCollections.observableArrayList();
+
+    public ObservableList<String> getLabelList() {
+
+        return labelList;
+    }
 
 
 

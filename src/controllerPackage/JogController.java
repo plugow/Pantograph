@@ -3,11 +3,15 @@ package controllerPackage;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import mainPackage.ForwardKin;
+import mainPackage.InversKin;
 import mainPackage.MainModel;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class JogController implements Initializable{
 
@@ -32,10 +36,9 @@ public class JogController implements Initializable{
     @FXML Slider velocitySlider;
     //endregion
 
-
-    // togglegroup for set way to move
+    //region data declaration
     final private ToggleGroup group = new ToggleGroup();
-
+    ForwardKin forwardKin=new ForwardKin();
     private int velocity;
     private int velocityInit;
     private int step;
@@ -47,7 +50,13 @@ public class JogController implements Initializable{
     private int angleValue3;
     private int angleValue33;
     private int angleValue4;
+    private int xValue;
+    private int yValue;
+    private int zValue;
+    private double[] thetaValue=new double[3];
     private String checkMode;
+    private ReentrantLock lock = new ReentrantLock();
+    //endregion
 
     //region timer an timertask declaration and implementaion
     private Timer timer = new Timer();
@@ -200,6 +209,11 @@ public class JogController implements Initializable{
         yPlus.setDisable(false);
         zMinus.setDisable(false);
         zPlus.setDisable(false);
+        float[][] results;
+        results=forwardKin.forward(angleValue1,angleValue2,angleValue3);
+        xValue= (int) results[3][0];
+        yValue= (int) results[3][1];
+        zValue= (int) results[3][2];
     }
 
     // set every servo's position on 90 degrees
@@ -212,6 +226,7 @@ public class JogController implements Initializable{
         angleValue2=90;
         angleValue3=90;
         angleValue4=90;
+
 
     }
 
@@ -227,8 +242,21 @@ public class JogController implements Initializable{
         System.out.println(angleValue1);
         angleValue1-=1;
 
-        MainModel.getInstance().currentValue1().setText(Integer.toString(angleValue1));
+        //MainModel.getInstance().getLabelList().addAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
+        lock.lock();
+        try {
+            MainModel.getInstance().getLabelList().removeAll();
+            MainModel.getInstance().getLabelList().add(0,Integer.toString(angleValue1));
+            MainModel.getInstance().getLabelList().add(1,Integer.toString(angleValue2));
+            MainModel.getInstance().getLabelList().add(2,Integer.toString(angleValue3));
+
+        } finally {
+            lock.unlock();
+        }
+
+
         MainModel.getInstance().currentLink().sendToneMessage(1,angleValue1,0);
+        MainModel.getInstance().currentValue1().setText(Integer.toString(angleValue1));
 
     }
     @FXML private void firstPlusClicked(){
@@ -245,6 +273,19 @@ public class JogController implements Initializable{
         angleValue2-=1;
         MainModel.getInstance().currentValue2().setText(Integer.toString(angleValue2));
         MainModel.getInstance().currentLink().sendToneMessage(2,angleValue2,0);
+
+        //MainModel.getInstance().getLabelList().addAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
+        lock.lock();
+        try {
+            MainModel.getInstance().getLabelList().removeAll();
+            MainModel.getInstance().getLabelList().add(0,Integer.toString(angleValue1));
+            MainModel.getInstance().getLabelList().add(1,Integer.toString(angleValue2));
+            MainModel.getInstance().getLabelList().add(2,Integer.toString(angleValue3));
+
+        } finally {
+            lock.unlock();
+        }
+
 
     }
     @FXML private void secondPlusClicked(){
@@ -279,24 +320,41 @@ public class JogController implements Initializable{
     // Cartesian buttons
     // first buttons
     @FXML private void xMinusClicked(){
+        xValue-=1;
+
+        setXyzPosition();
+
+
 
     }
     @FXML private void xPlusClicked(){
+        xValue+=1;
 
+        setXyzPosition();
     }
     //second buttons
     @FXML private void yMinusClicked(){
+        yValue-=1;
+
+        setXyzPosition();
 
     }
     @FXML private void yPlusClicked(){
+        yValue+=1;
+
+        setXyzPosition();
 
     }
     //third buttons
     @FXML private void zMinusClicked(){
+        zValue-=1;
 
+       setXyzPosition();
     }
     @FXML private void zPlusClicked(){
+        zValue+=1;
 
+        setXyzPosition();
     }
 
 
@@ -421,6 +479,25 @@ public class JogController implements Initializable{
         timer.purge();
 
     }
+
+
+    private void setXyzPosition(){
+        thetaValue=InversKin.inverse(xValue,yValue,zValue);
+        angleValue1=(int) Math.toDegrees(thetaValue[0]);
+        angleValue2=(int) Math.toDegrees(thetaValue[1]);
+        angleValue3=(int) Math.toDegrees(thetaValue[2]);
+        System.out.println(angleValue1);
+        System.out.println(angleValue2);
+        System.out.println(angleValue3);
+        MainModel.getInstance().currentLink().sendToneMessage(1,angleValue1,0);
+        MainModel.getInstance().currentLink().sendToneMessage(2,angleValue2,0);
+        MainModel.getInstance().currentLink().sendToneMessage(3,angleValue3,0);
+        MainModel.getInstance().currentValue3().setText(Integer.toString(angleValue1));
+        MainModel.getInstance().currentValue3().setText(Integer.toString(angleValue2));
+        MainModel.getInstance().currentValue3().setText(Integer.toString(angleValue3));
+
+    }
+
 
 
 
