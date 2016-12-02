@@ -6,10 +6,10 @@ public class InversKin {
 
     public static double[] inverse(double x, double y, double z){
         double[] angleValue=new double[3];
-        int armLength1=140;
+        int armLength1=200;
         int armLength2=450;
         int armLength3=350;
-        int armLength4=136;
+        int armLength4=137;
 
 
         angleValue[0]=Math.atan2(y,x);

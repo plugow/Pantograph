@@ -56,6 +56,7 @@ public class JogController implements Initializable{
     private double[] thetaValue=new double[3];
     private String checkMode;
     private ReentrantLock lock = new ReentrantLock();
+    private float[][] results;
     //endregion
 
     //region timer an timertask declaration and implementaion
@@ -97,7 +98,7 @@ public class JogController implements Initializable{
             angleValue1+=1;
             if(checkMode.equals("simulation")){
             if(angleValue11==angleValue1-step){
-                MainModel.getInstance().currentValue1().setText(Integer.toString(angleValue1));
+                MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
                 angleValue11=angleValue1;
             }}
             MainModel.getInstance().currentLink().sendToneMessage(1,angleValue1,255);
@@ -110,7 +111,7 @@ public class JogController implements Initializable{
             angleValue1-=1;
             if(checkMode.equals("simulation")){
             if(angleValue11==angleValue1+step){
-                MainModel.getInstance().currentValue1().setText(Integer.toString(angleValue1));
+                MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
                 angleValue11=angleValue1;
             }}
             MainModel.getInstance().currentLink().sendToneMessage(1,angleValue1,255);
@@ -124,7 +125,7 @@ public class JogController implements Initializable{
             angleValue2+=1;
             if(checkMode.equals("simulation")){
                 if(angleValue22==angleValue2-step){
-                    MainModel.getInstance().currentValue2().setText(Integer.toString(angleValue2));
+                    MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
                     angleValue22=angleValue2;
                 }}
             MainModel.getInstance().currentLink().sendToneMessage(2,angleValue2,255);
@@ -137,7 +138,7 @@ public class JogController implements Initializable{
             angleValue2-=1;
             if(checkMode.equals("simulation")){
                 if(angleValue22==angleValue2+step){
-                    MainModel.getInstance().currentValue2().setText(Integer.toString(angleValue2));
+                    MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
                     angleValue22=angleValue2;
                 }}
             MainModel.getInstance().currentLink().sendToneMessage(2,angleValue2,255);
@@ -152,7 +153,7 @@ public class JogController implements Initializable{
 
             if(checkMode.equals("simulation")){
                 if(angleValue33==angleValue3-step){
-                    MainModel.getInstance().currentValue3().setText(Integer.toString(angleValue3));
+                    MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
                     angleValue33=angleValue3;
                 }}
             MainModel.getInstance().currentLink().sendToneMessage(3,angleValue3,255);
@@ -165,7 +166,7 @@ public class JogController implements Initializable{
             angleValue3-=1;
             if(checkMode.equals("simulation")){
                 if(angleValue33==angleValue3+step){
-                    MainModel.getInstance().currentValue3().setText(Integer.toString(angleValue3));
+                    MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
                     angleValue33=angleValue3;
                 }}
             MainModel.getInstance().currentLink().sendToneMessage(3,angleValue3,255);
@@ -211,14 +212,12 @@ public class JogController implements Initializable{
         yPlus.setDisable(false);
         zMinus.setDisable(false);
         zPlus.setDisable(false);
-        float[][] results;
+
         results=forwardKin.forward((float) Math.toRadians(angleValue1),(float) Math.toRadians(angleValue2),(float) Math.toRadians(angleValue3));
         xValue= (int) results[3][0];
         yValue= (int) results[3][1];
         zValue= (int) results[3][2];
-        System.out.println(xValue);
-        System.out.println(yValue);
-        System.out.println(zValue);
+
     }
 
     // set every servo's position on 90 degrees
@@ -231,6 +230,9 @@ public class JogController implements Initializable{
         angleValue2=90;
         angleValue3=90;
         angleValue4=90;
+        xValue= 0;
+        yValue= -350;
+        zValue= 513;
         MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
 
 
@@ -259,6 +261,7 @@ public class JogController implements Initializable{
     @FXML private void firstPlusClicked(){
         angleValue1+=1;
         System.out.println(angleValue1);
+        MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
         MainModel.getInstance().currentLink().sendToneMessage(1,angleValue1,0);
         MainModel.getInstance().currentValue1().setText(Integer.toString(angleValue1));
 
@@ -365,6 +368,7 @@ public class JogController implements Initializable{
     }
 
     @FXML private void firstMinusReleased(){
+        MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
         minusTask1.cancel();
         timer.cancel();
         timer.purge();
@@ -384,6 +388,7 @@ public class JogController implements Initializable{
     }
 
     @FXML private void firstPlusReleased(){
+        MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
         plusTask1.cancel();
         timer.cancel();
         timer.purge();
@@ -405,6 +410,7 @@ public class JogController implements Initializable{
     }
 
     @FXML private void secondMinusReleased(){
+        MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
         minusTask2.cancel();
         timer.cancel();
         timer.purge();
@@ -424,6 +430,7 @@ public class JogController implements Initializable{
     }
 
     @FXML private void secondPlusReleased(){
+        MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
         plusTask2.cancel();
         timer.cancel();
         timer.purge();
@@ -445,6 +452,7 @@ public class JogController implements Initializable{
     }
 
     @FXML private void thirdMinusReleased(){
+        MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
         minusTask3.cancel();
         timer.cancel();
         timer.purge();
@@ -464,6 +472,7 @@ public class JogController implements Initializable{
     }
 
     @FXML private void thirdPlusReleased(){
+        MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
         plusTask3.cancel();
         timer.cancel();
         timer.purge();
@@ -473,18 +482,13 @@ public class JogController implements Initializable{
 
     private void setXyzPosition(){
         thetaValue=InversKin.inverse(xValue,yValue,zValue);
-        angleValue1=(int) Math.toDegrees(thetaValue[0]);
-        angleValue2=(int) Math.toDegrees(thetaValue[1]);
-        angleValue3=(int) Math.toDegrees(thetaValue[2]);
+        angleValue1=(int) Math.round(Math.toDegrees(thetaValue[0]));
+        angleValue2=(int) Math.round(Math.toDegrees(thetaValue[1]));
+        angleValue3=(int) Math.round(Math.toDegrees(thetaValue[2]));
         System.out.println(angleValue1);
         System.out.println(angleValue2);
         System.out.println(angleValue3);
-//        MainModel.getInstance().currentLink().sendToneMessage(1,angleValue1,0);
-//        MainModel.getInstance().currentLink().sendToneMessage(2,angleValue2,0);
-//        MainModel.getInstance().currentLink().sendToneMessage(3,angleValue3,0);
-//        MainModel.getInstance().currentValue3().setText(Integer.toString(angleValue1));
-//        MainModel.getInstance().currentValue3().setText(Integer.toString(angleValue2));
-//        MainModel.getInstance().currentValue3().setText(Integer.toString(angleValue3));
+
         MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
 
     }

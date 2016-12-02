@@ -143,6 +143,7 @@ public class MainWindowController implements Initializable{
         setForwardKin(alfa1,alfa2,alfa3);
 
 
+
     }
 
 
