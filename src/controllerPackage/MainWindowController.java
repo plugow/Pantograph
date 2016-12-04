@@ -21,7 +21,7 @@ import java.awt.*;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.locks.ReentrantLock;
+
 
 public class MainWindowController implements Initializable{
     private int power=IProtocol.LOW;
@@ -32,17 +32,14 @@ public class MainWindowController implements Initializable{
     @FXML Pane pane;
 
     private float pi=(float)Math.PI;
-    //private Plot3DPanel plot3=new Plot3DPanel();
     private ForwardKin forwardKin=new ForwardKin();
-    //private float[][] results=new float[4][3];
     private double[] x = new double[5];
     private double[] y = new double[5];
     private double[] z = new double[5];
     private float alfa1=pi/2;
     private float alfa2=pi/2;
     private float alfa3=pi/2;
-    private ReentrantLock lock = new ReentrantLock();
-    List<String> lista;
+
 
 
     @Override
@@ -51,10 +48,10 @@ public class MainWindowController implements Initializable{
 
 
 
-        MainModel.getInstance().getLabelList().addListener((ListChangeListener.Change<? extends String> c)-> {
+        MainModel.getInstance().getIntegerList().addListener((ListChangeListener.Change<? extends Integer> c)-> {
             c.next();
 
-           if (c.wasReplaced())updatePlot(MainModel.getInstance().getLabelList());
+           if (c.wasReplaced())updatePlot(MainModel.getInstance().getIntegerList());
 
             }
         );
@@ -135,11 +132,11 @@ public class MainWindowController implements Initializable{
     }
 
 
-    private void updatePlot(List<String> list){
+    private void updatePlot(List<Integer> list){
         //System.out.println(list.get(0)+ list.get(1) +list.get(2));
-        alfa1=(float)Math.toRadians(Integer.parseInt(list.get(0)));
-        alfa2=(float)Math.toRadians(Integer.parseInt(list.get(1)));
-        alfa3=(float)Math.toRadians(Integer.parseInt(list.get(2)));
+        alfa1=(float)Math.toRadians(list.get(0));
+        alfa2=(float)Math.toRadians(list.get(1));
+        alfa3=(float)Math.toRadians(list.get(2));
         setForwardKin(alfa1,alfa2,alfa3);
 
 
