@@ -29,6 +29,11 @@ public class MainModel{
     }
 
 
+    public void setCheckMode(boolean checkMode) {
+        this.checkMode = checkMode;
+    }
+
+    private boolean checkMode=false;
 
     private ObservableList<Integer> integerList = FXCollections.observableArrayList(1,2,3);
 
@@ -38,7 +43,7 @@ public class MainModel{
     }
 
 
-
-
-
+    public boolean isCheckMode() {
+        return checkMode;
+    }
 }

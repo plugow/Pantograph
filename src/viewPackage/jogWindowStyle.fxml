@@ -18,12 +18,12 @@
             <children>
                 <Pane prefHeight="200.0" prefWidth="200.0">
                     <children>
-                        <Button layoutX="131.0" layoutY="48.0" mnemonicParsing="false" onAction="#xMinusClicked" text="&lt;" fx:id="xMinus" />
-                        <Button layoutX="156.0" layoutY="48.0" mnemonicParsing="false" onAction="#xPlusClicked" text="&gt;" fx:id="xPlus" />
-                        <Button fx:id="yMinus" layoutX="131.0" layoutY="77.0" mnemonicParsing="false" onAction="#yMinusClicked" text="&lt;" />
-                        <Button fx:id="zMinus" layoutX="131.0" layoutY="109.0" mnemonicParsing="false" onAction="#zMinusClicked" text="&lt;" />
-                        <Button fx:id="yPlus" layoutX="156.0" layoutY="77.0" mnemonicParsing="false" onAction="#yPlusClicked" text="&gt;" />
-                        <Button fx:id="zPlus" layoutX="156.0" layoutY="109.0" mnemonicParsing="false" onAction="#zPlusClicked" text="&gt;" />
+                        <Button layoutX="131.0" layoutY="48.0" mnemonicParsing="false" onMouseClicked="#xMinusClicked" onMousePressed="#xMinusPressed" onMouseReleased="#xMinusReleased" text="&lt;" fx:id="xMinus" />
+                        <Button layoutX="156.0" layoutY="48.0" mnemonicParsing="false" onMouseClicked="#xPlusClicked" onMousePressed="#xPlusPressed" onMouseReleased="#xPlusReleased" text="&gt;" fx:id="xPlus" />
+                        <Button fx:id="yMinus" layoutX="131.0" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#yMinusClicked" onMousePressed="#yMinusPressed" onMouseReleased="#yMinusReleased" text="&lt;" />
+                        <Button fx:id="zMinus" layoutX="131.0" layoutY="109.0" mnemonicParsing="false" onMouseClicked="#zMinusClicked" onMousePressed="#zMinusPressed" onMouseReleased="#zMinusReleased" text="&lt;" />
+                        <Button fx:id="yPlus" layoutX="156.0" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#yPlusClicked" onMousePressed="#yPlusPressed" onMouseReleased="#yPlusReleased" text="&gt;" />
+                        <Button fx:id="zPlus" layoutX="156.0" layoutY="109.0" mnemonicParsing="false" onMouseClicked="#zPlusClicked" onMousePressed="#zPlusPressed" onMouseReleased="#zPlusReleased" text="&gt;" />
                         <Button fx:id="firstMinus" layoutX="20.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#firstMinusClicked" onMousePressed="#firstMinusPressed" onMouseReleased="#firstMinusReleased" text="&lt;" />
                         <Button fx:id="thirdPlus" layoutX="45.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#thirdPlusClicked" onMousePressed="#thirdPlusPressed" onMouseReleased="#thirdPlusReleased" text="&gt;" />
                         <Button fx:id="secondMinus" layoutX="20.0" layoutY="80.0" mnemonicParsing="false" onMouseClicked="#secondMinusClicked" onMousePressed="#secondMinusPressed" onMouseReleased="#secondMinusReleased" text="&lt;" />

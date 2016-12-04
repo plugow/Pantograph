@@ -51,6 +51,7 @@ public class StartWindowController implements Initializable{
                 //send is connected to main window
 
                 MainModel.getInstance().currentLabel().setText("connected");
+                MainModel.getInstance().setCheckMode(false);
 
                 //set mainWindow
                 MainModel.getInstance().currentStage().show();
@@ -68,6 +69,7 @@ public class StartWindowController implements Initializable{
         Stage startWindow=(Stage) connectButton.getScene().getWindow();
         startWindow.close();
         MainModel.getInstance().currentLabel().setText("simulation");
+        MainModel.getInstance().setCheckMode(true);
         MainModel.getInstance().currentStage().show();
     }
 
