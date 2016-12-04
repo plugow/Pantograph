@@ -123,7 +123,7 @@ public class MainWindowController implements Initializable{
 
         plot3.addLinePlot("plot", Color.BLACK, x, y,z);
         plot3.addScatterPlot("plot2",Color.BLUE,x,y,z);
-        if (eff==1) plot3.getPlot(1).setColor(Color.RED);
+        if (eff==118) plot3.getPlot(1).setColor(Color.RED);
         else plot3.getPlot(1).setColor(Color.BLUE);
         plot3.setFixedBounds(0,-900,900);
         plot3.setFixedBounds(1,-900,900);
