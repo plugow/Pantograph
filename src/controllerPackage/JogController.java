@@ -55,6 +55,7 @@ public class JogController implements Initializable{
     private int xxValue;
     private int yyValue;
     private int zzValue;
+    private boolean isOpened;
 
 
 
@@ -80,6 +81,7 @@ public class JogController implements Initializable{
         zPlus.setDisable(true);
         velocitySlider.valueProperty().addListener((obs, oldval, newVal) ->
                 velocitySlider.setValue(newVal.intValue()));
+        isOpened =false;
 
 
     }
@@ -380,7 +382,18 @@ public class JogController implements Initializable{
 
     // end effector open/close
     @FXML private void effectorButtonClicked(){
-        MainModel.getInstance().currentLink().sendToneMessage(4,angleValue4,0);
+        if(isOpened){
+            angleValue4=118;
+            MainModel.getInstance().currentLink().sendToneMessage(4,angleValue4,200);
+            isOpened=false;
+            System.out.println("effector closed");
+        }
+        else{angleValue4=90;
+            MainModel.getInstance().currentLink().sendToneMessage(4,angleValue4,200);
+            isOpened=true;
+            System.out.println("effector opened");
+        }
+
     }
 
 
