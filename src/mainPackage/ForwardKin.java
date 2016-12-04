@@ -38,6 +38,7 @@ public class ForwardKin {
 
 
 
+
         for (int kk=0;kk<5;kk++) {
             float cA = (float)Math.cos(alfa[kk]);
             float sA = (float)Math.sin(alfa[kk]);

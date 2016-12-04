@@ -51,23 +51,10 @@ public class Main extends Application {
         MainModel.getInstance().currentStage().setTitle("Pantograph");
         MainModel.getInstance().currentStage().setScene(new Scene(root, 900, 600));
 
-//
-//        thetaValue=InversKin.inverse(0,-350,503);
-//        angleValue1=(int) Math.toDegrees(thetaValue[0]);
-//        angleValue2=(int) Math.toDegrees(thetaValue[1]);
-//        angleValue3=(int) Math.toDegrees(thetaValue[2]);
-//        System.out.println( Math.toDegrees(thetaValue[0]));
-//        System.out.println( Math.toDegrees(thetaValue[1]));
-//        System.out.println( Math.toDegrees(thetaValue[2]));
-//
-//        System.out.println( Math.round(Math.toDegrees(thetaValue[0])));
-//        System.out.println( Math.round(Math.toDegrees(thetaValue[1])));
-//        System.out.println( Math.round(Math.toDegrees(thetaValue[2])));
-//
-//
-//        System.out.println( (int)Math.toDegrees(thetaValue[0]));
-//        System.out.println( (int)Math.toDegrees(thetaValue[1]));
-//        System.out.println( (int)Math.toDegrees(thetaValue[2]));
+
+
+
+
 
 
     }

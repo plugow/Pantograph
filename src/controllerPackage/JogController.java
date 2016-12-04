@@ -7,11 +7,9 @@ import mainPackage.ForwardKin;
 import mainPackage.InversKin;
 import mainPackage.MainModel;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class JogController implements Initializable{
 
@@ -38,7 +36,7 @@ public class JogController implements Initializable{
 
     //region data declaration
     final private ToggleGroup group = new ToggleGroup();
-    ForwardKin forwardKin=new ForwardKin();
+    private ForwardKin forwardKin=new ForwardKin();
     private int velocity;
     private int velocityInit;
     private int step;
@@ -53,10 +51,8 @@ public class JogController implements Initializable{
     private int xValue;
     private int yValue;
     private int zValue;
-    private double[] thetaValue=new double[3];
     private String checkMode;
-    private ReentrantLock lock = new ReentrantLock();
-    private float[][] results;
+
     //endregion
 
     //region timer an timertask declaration and implementaion
@@ -212,7 +208,7 @@ public class JogController implements Initializable{
         yPlus.setDisable(false);
         zMinus.setDisable(false);
         zPlus.setDisable(false);
-
+        float[][] results;
         results=forwardKin.forward((float) Math.toRadians(angleValue1),(float) Math.toRadians(angleValue2),(float) Math.toRadians(angleValue3));
         xValue= (int) results[3][0];
         yValue= (int) results[3][1];
@@ -255,7 +251,7 @@ public class JogController implements Initializable{
 
 
         MainModel.getInstance().currentLink().sendToneMessage(1,angleValue1,0);
-        MainModel.getInstance().currentValue1().setText(Integer.toString(angleValue1));
+
 
     }
     @FXML private void firstPlusClicked(){
@@ -263,7 +259,7 @@ public class JogController implements Initializable{
         System.out.println(angleValue1);
         MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
         MainModel.getInstance().currentLink().sendToneMessage(1,angleValue1,0);
-        MainModel.getInstance().currentValue1().setText(Integer.toString(angleValue1));
+
 
     }
 
@@ -271,7 +267,7 @@ public class JogController implements Initializable{
     @FXML private void secondMinusClicked(){
         System.out.println(angleValue2);
         angleValue2-=1;
-        MainModel.getInstance().currentValue2().setText(Integer.toString(angleValue2));
+
         MainModel.getInstance().currentLink().sendToneMessage(2,angleValue2,0);
 
 
@@ -283,7 +279,7 @@ public class JogController implements Initializable{
         angleValue2+=1;
         System.out.println(angleValue2);
         MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
-        MainModel.getInstance().currentValue2().setText(Integer.toString(angleValue2));
+
         MainModel.getInstance().currentLink().sendToneMessage(2,angleValue2,0);
 
     }
@@ -293,7 +289,7 @@ public class JogController implements Initializable{
         System.out.println(angleValue3);
         angleValue3-=1;
         MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
-        MainModel.getInstance().currentValue3().setText(Integer.toString(angleValue3));
+
 
 
         MainModel.getInstance().currentLink().sendToneMessage(3,angleValue3,0);
@@ -303,7 +299,7 @@ public class JogController implements Initializable{
         angleValue3+=1;
         System.out.println(angleValue3);
         MainModel.getInstance().getLabelList().setAll(Integer.toString(angleValue1),Integer.toString(angleValue2),Integer.toString(angleValue3));
-        MainModel.getInstance().currentValue3().setText(Integer.toString(angleValue3));
+
         MainModel.getInstance().currentLink().sendToneMessage(3,angleValue3,0);
 
     }
@@ -481,6 +477,7 @@ public class JogController implements Initializable{
 
 
     private void setXyzPosition(){
+        double[] thetaValue;
         thetaValue=InversKin.inverse(xValue,yValue,zValue);
         angleValue1=(int) Math.round(Math.toDegrees(thetaValue[0]));
         angleValue2=(int) Math.round(Math.toDegrees(thetaValue[1]));

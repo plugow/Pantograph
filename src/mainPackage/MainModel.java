@@ -33,16 +33,6 @@ public class MainModel{
         return stage;
     }
 
-    private Label value1=new Label("1");
-    public Label currentValue1(){return value1;}
-
-    private Label value2=new Label("2");
-    public Label currentValue2(){return value2;}
-
-    private Label value3=new Label("3");
-    public Label currentValue3(){return value3;}
-
-
 
 
     private ObservableList<String> labelList= FXCollections.observableArrayList("1","2","3");
