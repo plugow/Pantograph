@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.locks.ReentrantLock;
+
 
 public class JogController implements Initializable{
 
@@ -55,21 +55,10 @@ public class JogController implements Initializable{
     private int xxValue;
     private int yyValue;
     private int zzValue;
-    private final ReentrantLock lock= new ReentrantLock();
+
 
 
     //endregion
-
-    //region timer an timertask declaration and implementaion
-    private Timer timer = new Timer();
-    private TimerTask plusTask1 = new PlusTimerTask1();
-    private TimerTask minusTask1 = new MinusTimerTask1();
-    private TimerTask plusTask2 = new PlusTimerTask2();
-    private TimerTask minusTask2 = new MinusTimerTask2();
-    private TimerTask plusTask3 = new PlusTimerTask3();
-    private TimerTask minusTask3 = new MinusTimerTask3();
-
-
 
     // initialize method
     @Override
@@ -94,6 +83,19 @@ public class JogController implements Initializable{
 
 
     }
+
+    //region timers for jog move
+    private Timer timer = new Timer();
+    private TimerTask plusTask1 = new PlusTimerTask1();
+    private TimerTask minusTask1 = new MinusTimerTask1();
+    private TimerTask plusTask2 = new PlusTimerTask2();
+    private TimerTask minusTask2 = new MinusTimerTask2();
+    private TimerTask plusTask3 = new PlusTimerTask3();
+    private TimerTask minusTask3 = new MinusTimerTask3();
+
+
+
+
 
     private class PlusTimerTask1 extends TimerTask {
 
@@ -180,7 +182,7 @@ public class JogController implements Initializable{
 
     //endregion
 
-
+    //region timers for cartesian move
     private TimerTask plusTaskX = new PlusTimerTaskX();
     private TimerTask minusTaskX = new MinusTimerTaskX();
     private TimerTask plusTaskY = new PlusTimerTaskY();
@@ -311,6 +313,7 @@ public class JogController implements Initializable{
             MainModel.getInstance().currentLink().sendToneMessage(3,angleValue3,255);
         }
     }
+    //endregion
 
 
     // select way to move
@@ -381,6 +384,7 @@ public class JogController implements Initializable{
     }
 
 
+    //region jog buttons
     // jog buttons
     // first jog buttons
     @FXML private void firstMinusClicked(){
@@ -439,9 +443,9 @@ public class JogController implements Initializable{
         MainModel.getInstance().currentLink().sendToneMessage(3,angleValue3,0);
 
     }
+    //endregion
 
-
-
+    //region Cartesian buttons
     // Cartesian buttons
     // first buttons
     @FXML private void xMinusClicked(){
@@ -481,9 +485,9 @@ public class JogController implements Initializable{
 
         setXyzPosition();
     }
+    //endregion
 
-
-
+    //region joint pressed and released buttons
     // action when mouse is pressed
     // first servo
     @FXML private  void firstMinusPressed(){
@@ -606,31 +610,9 @@ public class JogController implements Initializable{
         timer.purge();
 
     }
+    //endregion
 
-
-
-    private void setXyzPosition(){
-        double[] thetaValue;
-        thetaValue=InversKin.inverse(xValue,yValue,zValue);
-        angleValue1=(int) Math.round(Math.toDegrees(thetaValue[0]));
-        angleValue2=(int) Math.round(Math.toDegrees(thetaValue[1]));
-        angleValue3=(int) Math.round(Math.toDegrees(thetaValue[2]));
-        System.out.println(angleValue1);
-        System.out.println(angleValue2);
-        System.out.println(angleValue3);
-
-        MainModel.getInstance().getIntegerList().setAll(angleValue1,angleValue2,angleValue3);
-    }
-
-
-
-
-
-
-
-
-
-
+    //region xyz pressed and released buttons
     @FXML private  void xMinusPressed(){
         velocityInit=(int)velocitySlider.getValue();
         velocity=101-velocityInit;
@@ -750,6 +732,24 @@ public class JogController implements Initializable{
         timer.cancel();
         timer.purge();
 
+    }
+    //endregion
+
+    private void setXyzPosition(){
+        double[] thetaValue;
+        thetaValue=InversKin.inverse(xValue,yValue,zValue);
+        angleValue1=(int) Math.round(Math.toDegrees(thetaValue[0]));
+        angleValue2=(int) Math.round(Math.toDegrees(thetaValue[1]));
+        angleValue3=(int) Math.round(Math.toDegrees(thetaValue[2]));
+        System.out.println(angleValue1);
+        System.out.println(angleValue2);
+        System.out.println(angleValue3);
+
+        MainModel.getInstance().currentLink().sendToneMessage(1,angleValue1,255);
+        MainModel.getInstance().currentLink().sendToneMessage(2,angleValue2,255);
+        MainModel.getInstance().currentLink().sendToneMessage(3,angleValue3,255);
+
+        MainModel.getInstance().getIntegerList().setAll(angleValue1,angleValue2,angleValue3);
     }
 
 
