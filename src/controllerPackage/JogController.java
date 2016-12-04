@@ -117,7 +117,7 @@ public class JogController implements Initializable{
     private class PlusTimerTask2 extends TimerTask {
 
         public void run() {
-            //System.out.println(angleValue2);
+
             angleValue2+=1;
             if(checkMode.equals("simulation")){
                 if(angleValue22==angleValue2-step){
