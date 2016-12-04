@@ -387,11 +387,13 @@ public class JogController implements Initializable{
             MainModel.getInstance().currentLink().sendToneMessage(4,angleValue4,200);
             isOpened=false;
             System.out.println("effector closed");
+            MainModel.getInstance().getIntegerList().set(3,1);
         }
         else{angleValue4=90;
             MainModel.getInstance().currentLink().sendToneMessage(4,angleValue4,200);
             isOpened=true;
             System.out.println("effector opened");
+            MainModel.getInstance().getIntegerList().set(3,0);
         }
 
     }

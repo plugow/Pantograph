@@ -39,6 +39,7 @@ public class MainWindowController implements Initializable{
     private float alfa1=pi/2;
     private float alfa2=pi/2;
     private float alfa3=pi/2;
+    private int effector;
 
 
 
@@ -59,7 +60,7 @@ public class MainWindowController implements Initializable{
 
 
 
-        setForwardKin(alfa1,alfa2,alfa3);
+        setForwardKin(alfa1,alfa2,alfa3,effector);
         pane.getChildren().add(swingNode);
 
 
@@ -99,7 +100,7 @@ public class MainWindowController implements Initializable{
     }
 
 
-    private void setForwardKin(float theta1, float theta2, float theta3){
+    private void setForwardKin(float theta1, float theta2, float theta3,int eff){
         float[][] results;
         results=forwardKin.forward(theta1,theta2,theta3);
         x[1]=results[0][0];
@@ -122,6 +123,8 @@ public class MainWindowController implements Initializable{
 
         plot3.addLinePlot("plot", Color.BLACK, x, y,z);
         plot3.addScatterPlot("plot2",Color.BLUE,x,y,z);
+        if (eff==1) plot3.getPlot(1).setColor(Color.RED);
+        else plot3.getPlot(1).setColor(Color.BLUE);
         plot3.setFixedBounds(0,-900,900);
         plot3.setFixedBounds(1,-900,900);
         plot3.setFixedBounds(2,0,1000);
@@ -138,7 +141,8 @@ public class MainWindowController implements Initializable{
         alfa1=(float)Math.toRadians(list.get(0));
         alfa2=(float)Math.toRadians(list.get(1));
         alfa3=(float)Math.toRadians(list.get(2));
-        setForwardKin(alfa1,alfa2,alfa3);
+        effector=list.get(3);
+        setForwardKin(alfa1,alfa2,alfa3,effector);
 
 
 

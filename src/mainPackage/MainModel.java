@@ -35,7 +35,7 @@ public class MainModel{
 
     private boolean checkMode=false;
 
-    private ObservableList<Integer> integerList = FXCollections.observableArrayList(1,2,3);
+    private ObservableList<Integer> integerList = FXCollections.observableArrayList(1,2,3,0);
 
     public ObservableList<Integer> getIntegerList() {
 
