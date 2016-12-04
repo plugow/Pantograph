@@ -127,6 +127,7 @@ public class MainWindowController implements Initializable{
         plot3.setFixedBounds(2,0,1000);
         plot3.setPreferredSize(new Dimension(500,500));
 
+
         swingNode.setContent(plot3);
 
     }

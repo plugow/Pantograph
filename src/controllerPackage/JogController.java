@@ -81,7 +81,7 @@ public class JogController implements Initializable{
         zPlus.setDisable(true);
         velocitySlider.valueProperty().addListener((obs, oldval, newVal) ->
                 velocitySlider.setValue(newVal.intValue()));
-        isOpened =false;
+        isOpened =true;
 
 
     }
@@ -367,11 +367,11 @@ public class JogController implements Initializable{
         MainModel.getInstance().currentLink().sendToneMessage(1,90,200);
         MainModel.getInstance().currentLink().sendToneMessage(2,90,200);
         MainModel.getInstance().currentLink().sendToneMessage(3,90,200);
-        MainModel.getInstance().currentLink().sendToneMessage(4,90,200);
+        //MainModel.getInstance().currentLink().sendToneMessage(4,90,200);
         angleValue1=90;
         angleValue2=90;
         angleValue3=90;
-        angleValue4=90;
+        //angleValue4=90;
         xValue= 0;
         yValue= -350;
         zValue= 513;
