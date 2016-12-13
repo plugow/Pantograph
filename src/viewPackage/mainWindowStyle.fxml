@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -31,11 +33,34 @@
             </menus>
         </MenuBar>
         <ToolBar prefHeight="40.0" prefWidth="200.0">
+
             <items>
-                <Button fx:id="ledOn" mnemonicParsing="false" onAction="#ledOnClicked" text="Led On" />
-                <Button fx:id="ledOff" mnemonicParsing="false" onAction="#ledOffClicked" text="Led Off" />
-                <Button fx:id="jogOperation" layoutX="69.0" layoutY="13.0" mnemonicParsing="false" onAction="#jogOperationClicked" text="JOG" />
-                <Button fx:id="disconnectButton" mnemonicParsing="false" onAction="#disconnectButtonClicked" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="25.0">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/openButton.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button mnemonicParsing="false" prefHeight="25.0">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/saveButton.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+                <Button fx:id="jogOperation" layoutX="69.0" layoutY="13.0" maxHeight="-Infinity" mnemonicParsing="false" onAction="#jogOperationClicked" prefHeight="25.0" text="JOG OPERATIONS">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/move_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button mnemonicParsing="false" text="Mode" />
             </items>
         </ToolBar>
         <HBox spacing="5.0" VBox.vgrow="ALWAYS">
@@ -43,17 +68,37 @@
                 <Pane fx:id="pane" prefHeight="500.0" prefWidth="500.0" HBox.hgrow="ALWAYS" />
                 <VBox prefHeight="222.0" prefWidth="331.0" spacing="5.0" HBox.hgrow="ALWAYS">
                     <children>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                             <content>
-                                <VBox prefHeight="200.0" prefWidth="200.0">
+                                <VBox>
                                     <children>
-                                        <Label text="Label" />
-                                        <Label text="Label" />
+                                        <Label text="Your code">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font></Label>
+                              <TextArea prefHeight="224.0" prefWidth="356.0" />
                                     </children>
                                 </VBox>
                             </content>
                         </ScrollPane>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox prefHeight="244.0" prefWidth="354.0">
+                           <children>
+                              <Label text="Saved Points">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TableView prefHeight="238.0" prefWidth="354.0">
+                                <columns>
+                                  <TableColumn prefWidth="66.0" text="Name" />
+                                  <TableColumn prefWidth="286.0" text="Coordinates" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </content></ScrollPane>
                     </children>
                 </VBox>
             </children>
@@ -65,6 +110,9 @@
             <VBox.margin>
                 <Insets left="5.0" right="5.0" />
             </VBox.margin>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
         </Label>
     </children>
 </VBox>

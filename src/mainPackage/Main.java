@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -15,17 +16,6 @@ import javafx.util.Duration;
 
 
 public class Main extends Application {
-//    private int angleValue1;
-//    private int angleValue11;
-//    private int angleValue2;
-//    private int angleValue22;
-//    private int angleValue3;
-//    private int angleValue33;
-//    private int angleValue4;
-//    private int xValue;
-//    private int yValue;
-//    private int zValue;
-//    private double[] thetaValue=new double[3];
 
     @Override
     public void start(Stage startWindow) throws Exception {
@@ -35,10 +25,12 @@ public class Main extends Application {
         Parent root2 = FXMLLoader.load(getClass().getResource("../ViewPackage/startWindowStyle.fxml"));
         Parent root3 = FXMLLoader.load(getClass().getResource("../ViewPackage/previewStyle.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("../ViewPackage/mainWindowStyle.fxml"));
-
+        MainModel.getInstance().currentStage().getIcons().add(new Image("/viewPackage/images/manipulator_logo.png"));
 
 
         // set startWindow
+        startWindow.getIcons().add(new Image("/viewPackage/images/manipulator_logo.png"));
+        //startWindow.
         startWindow.setTitle("Pantograph");
         startWindow.setScene(new Scene(root3, 340, 200));
         startWindow.show();
